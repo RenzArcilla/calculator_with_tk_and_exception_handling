@@ -78,12 +78,28 @@ from tkinter import *
 #    end:
 
 
-
+#         initialize value_1 and value_2 (will be used for calculation)
 value_1 = 0
 value_2 = 0
 
+#         create a window
+#         name window
+#         adjust window size
+#         make window unresizable
 window = Tk()
 window.geometry("1100x670")
 window.title("Calculator")
 window.resizable(False, False)
 
+#         create a widget for entry of numbers, add text instructing the user what to input
+entry_widget_for_numbers = tk.Entry(window, width=30)
+entry_widget_for_numbers.pack()
+entry_widget_for_numbers.insert(0, "Enter a number here.")
+
+#         create a button for user to submit value 1
+#         in button, add a command that calls a function when clicked
+num_1_send_button = tk.Button(window, text="SEND NUM 1", command=num_1_send_button_clicked)
+num_1_send_button.pack()
+
+
+window.mainloop()
