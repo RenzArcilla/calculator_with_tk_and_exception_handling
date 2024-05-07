@@ -178,6 +178,15 @@ entry_widget_for_operators.insert(0, "Enter an operator here: +, -, x, /")
 #             test if the user submitted "x":
 #                 multiply value_1 by value_2, store in variable result
 #                 return variable result
+#             test if the user submitted "/":
+#                 if value 2 is zero:
+#                     display an error in the operator submission widget
+#                 if value 2 is not zero:
+#                     divide value_1 by value_2, store in variable result
+#                     set the numbers of digits after decimal to 2 digits
+#                     return variable result
+#             test if the user submitted any other character:
+#                 display an error message in the operator submission widget
 def calculate():
     operator = entry_widget_for_operators.get()
     if operator == "+":
@@ -189,6 +198,13 @@ def calculate():
     elif operator == "x":
         result = value_1 * value_2
         return result
+    elif operator == "/":
+        try:
+            result = value_1 / value_2
+            result = "{:.2f}".format(result)
+            return result
+        except ZeroDivisionError:
+            entry_widget_for_numbers.insert(0, "Error! We can't divide by 0.")
 
 
 #         create a function called submit_operator_button_clicked:
