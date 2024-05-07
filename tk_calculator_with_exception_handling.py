@@ -43,6 +43,7 @@ from tkinter import *
 #         create widget for users to input an operator, create a text stating what to input
 #         create a submit button for the operator widget
 #         in button, add a command that calls a function when submit_operator_button is clicked
+#
 #         create a function called submit_operator_button_clicked:
 #             if the current value in operator input widget is the same as the default text:
 #                 pass
@@ -153,9 +154,22 @@ def submit_value_2_clicked():
             entry_widget_for_numbers.delete(0, tk.END)
             entry_widget_for_numbers.insert(0, "Error encountered! Pls enter a number.")
 
+
 #         create another button for users to submit value 2
 #         in button add a command that calls a function when clicked
 num_2_send_button = tk.Button(window, text="SEND NUM 2", command=submit_value_2_clicked)
 num_2_send_button.pack()
+
+
+#         create widget for users to input an operator, create a text stating what to input
+entry_widget_for_operators = tk.Entry(window, width=30)
+entry_widget_for_operators.pack()
+entry_widget_for_operators.insert(0, "Enter an operator here: +, -, x, /")
+
+
+#         create a submit button for the operator widget
+#         in button, add a command that calls a function when submit_operator_button is clicked
+submit_operator_button = tk.Button(window, text="SEND OPERATOR", command=submit_operator_button_clicked)
+submit_operator_button.pack()
 
 window.mainloop()
