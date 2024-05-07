@@ -212,16 +212,31 @@ def calculate():
 #                 pass
 #             else:
 #                 call a function named calculate, store the returned value in variable named final_result
+#                 concatenate the value to a string: "RESULT:"
+#                 update the text in the result label widget
 def submit_operator_button_clicked():
     if entry_widget_for_operators.get() == "Enter an operator here: +, -, x, /":
         pass
     else:
         final_result = calculate(value_1, value_2)
+        final_result = "RESULT: " + final_result
+        result_widget.config(text=final_result)  # updates the result in the widget
 
 
 #         create a submit button for the operator widget
 #         in button, add a command that calls a function when submit_operator_button is clicked
 submit_operator_button = tk.Button(window, text="SEND OPERATOR", command=submit_operator_button_clicked)
 submit_operator_button.pack()
+
+
+#         create a result label widget that will display the final result
+#         create variable named result that stores a value:"RESULT:"
+#         set the text in the result label widget to the variable "result"
+result_widget = tk.Label(window, width=30)
+# the following 2 lines of code is executed, it is updated when a calculation occurs
+result_text = "RESULT:"
+result_widget.config(text=result_text)
+result_widget.pack()
+
 
 window.mainloop()
