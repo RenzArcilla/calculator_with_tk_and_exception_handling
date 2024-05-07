@@ -53,6 +53,7 @@ from tkinter import *
 #                 update the text in the result label widget
 #
 #         create function named calculate:
+#             get the current value in entry_widget_for_operators
 #             test if the user submitted the addition sign:
 #                 add value_1 and value_2, store in variable result
 #                 return variable result
@@ -69,7 +70,6 @@ from tkinter import *
 #                     divide value_1 by value_2, store in variable result
 #                     set the numbers of digits after decimal to 2 digits
 #                     return variable result
-#
 #             test if the user submitted any other character:
 #                 display an error message in the operator submission widget
 #
@@ -165,6 +165,42 @@ num_2_send_button.pack()
 entry_widget_for_operators = tk.Entry(window, width=30)
 entry_widget_for_operators.pack()
 entry_widget_for_operators.insert(0, "Enter an operator here: +, -, x, /")
+
+
+#         create function named calculate:
+#             get the current value in entry_widget_for_operators
+#             test if the user submitted the addition sign:
+#                 add value_1 and value_2, store in variable result
+#                 return variable result
+#             test if the user submitted the dash sign:
+#                 subtract value_1 by value_2, store in variable result
+#                 return variable result
+#             test if the user submitted "x":
+#                 multiply value_1 by value_2, store in variable result
+#                 return variable result
+def calculate():
+    operator = entry_widget_for_operators.get()
+    if operator == "+":
+        result = value_1 + value_2
+        return result
+    elif operator == "-":
+        result = value_1 - value_2
+        return result
+    elif operator == "x":
+        result = value_1 * value_2
+        return result
+
+
+#         create a function called submit_operator_button_clicked:
+#             if the current value in operator input widget is the same as the default text:
+#                 pass
+#             else:
+#                 call a function named calculate, store the returned value in variable named final_result
+def submit_operator_button_clicked():
+    if entry_widget_for_operators.get() == "Enter an operator here: +, -, x, /":
+        pass
+    else:
+        final_result = calculate(value_1, value_2)
 
 
 #         create a submit button for the operator widget
