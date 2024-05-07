@@ -8,7 +8,7 @@ from tkinter import *
 #         create a window
 #         name window
 #         adjust window size
-#         make window unresizable
+#         make window non-resizable
 #
 #         create a widget for entry of numbers, add text instructing the user what to input
 #
@@ -85,21 +85,77 @@ value_2 = 0
 #         create a window
 #         name window
 #         adjust window size
-#         make window unresizable
+#         make window non-resizable
 window = Tk()
 window.geometry("1100x670")
 window.title("Calculator")
 window.resizable(False, False)
 
 #         create a widget for entry of numbers, add text instructing the user what to input
-entry_widget_for_numbers = tk.Entry(window, width=30)
+entry_widget_for_numbers = tk.Entry(window, width=50)
 entry_widget_for_numbers.pack()
 entry_widget_for_numbers.insert(0, "Enter a number here.")
 
+
+#         create a function called submit_value_1_clicked:
+#             test if the text in the widget did not change:
+#                 pass
+#             else:
+#                 set value_1 to global
+#                 get the current value inside the widget for submission of numbers
+#                 if value is a number:
+#                     store as float in value_1
+#                     update the text instruction in number submission widget
+#                 if value is NOT a number:
+#                     send an error message
+def submit_value_1_clicked():
+    if entry_widget_for_numbers.get() == "Enter a number here.":
+        pass
+    else:
+        global value_1
+        value_1 = entry_widget_for_numbers.get()
+        try:
+            value_1 = float(entry_widget_for_numbers.get())
+            entry_widget_for_numbers.delete(0, tk.END)
+            entry_widget_for_numbers.insert(0, "Please enter another number in this box")
+        except ValueError:
+            entry_widget_for_numbers.delete(0, tk.END)
+            entry_widget_for_numbers.insert(0, "Error encountered! Pls enter a number.")
+
+
 #         create a button for user to submit value 1
 #         in button, add a command that calls a function when clicked
-num_1_send_button = tk.Button(window, text="SEND NUM 1", command=num_1_send_button_clicked)
+num_1_send_button = tk.Button(window, text="SEND NUM 1", command=submit_value_1_clicked)
 num_1_send_button.pack()
 
+
+#         create a function called submit_value_1_clicked:
+#             if the new text instruction is unchanged:
+#                 pass
+#             else:
+#                 set value_2 to global
+#                 get the current value inside the widget for submission of numbers
+#                 if value is a number:
+#                     store as float in value_2
+#                     clear text in number submission widget
+#                 if value is NOT a number:
+#                     send an error message in the number submission widget
+def submit_value_2_clicked():
+    if entry_widget_for_numbers.get() == "Please enter another number in this box":
+        pass
+    else:
+        global value_2
+        value_2 = entry_widget_for_numbers.get()
+        try:
+            value_2 = float(entry_widget_for_numbers.get())
+            entry_widget_for_numbers.delete(0, tk.END)
+        except ValueError:
+            entry_widget_for_numbers.delete(0, tk.END)
+            entry_widget_for_numbers.insert(0, "Error encountered! Pls enter a number.")
+
+#         create another button for users to submit value 2
+#         in button add a command that calls a function when clicked
+num_2_send_button = tk.Button(window, text="SEND NUM 2", command=submit_value_2_clicked)
+num_2_send_button.pack()
 
 window.mainloop()
