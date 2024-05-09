@@ -88,7 +88,7 @@ value_2 = 0
 #         adjust window size
 #         make window non-resizable
 window = Tk()
-window.geometry("500x500")
+window.geometry("500x480")
 window.title("Calculator")
 window.resizable(False, False)
 window.config(bg="#808080")
@@ -99,7 +99,7 @@ blank_line.pack()
 
 
 #         create a widget for entry of numbers, add text instructing the user what to input
-entry_widget_for_numbers = tk.Entry(window, font=("Open Sans", 17), bg="#F2F2F2",
+entry_widget_for_numbers = tk.Entry(window, font=("Roboto", 17), bg="#F2F2F2",
                                     fg="#000000", justify="center", width=30)
 entry_widget_for_numbers.pack()
 entry_widget_for_numbers.insert(0, "Enter a number here")
@@ -178,7 +178,7 @@ blank_line.pack()
 entry_widget_for_operators = tk.Entry(window, width=27)
 entry_widget_for_operators.pack()
 entry_widget_for_operators.insert(0, "Enter an operator here: + - x /")
-entry_widget_for_operators.config(font=("Open Sans", 17), justify="center", bg="#F2F2F2", fg="#000000")
+entry_widget_for_operators.config(font=("Roboto", 17), justify="center", bg="#F2F2F2", fg="#000000")
 
 
 #         create function named calculate:
