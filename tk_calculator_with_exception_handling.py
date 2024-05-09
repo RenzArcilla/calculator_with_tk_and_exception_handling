@@ -111,7 +111,7 @@ entry_widget_for_numbers.insert(0, "Enter a number here.")
 #                     send an error message
 def submit_value_1_clicked():
     if entry_widget_for_numbers.get() == "Enter a number here.":
-        pass
+        return
     else:
         global value_1
         value_1 = entry_widget_for_numbers.get()
@@ -143,7 +143,7 @@ num_1_send_button.pack()
 #                     send an error message in the number submission widget
 def submit_value_2_clicked():
     if entry_widget_for_numbers.get() == "Please enter another number in this box":
-        pass
+        return
     else:
         global value_2
         value_2 = entry_widget_for_numbers.get()
@@ -187,7 +187,7 @@ entry_widget_for_operators.insert(0, "Enter an operator here: +, -, x, /")
 #                     return variable result
 #             test if the user submitted any other character:
 #                 display an error message in the operator submission widget
-def calculate():
+def calculate(value_1, value_2):
     operator = entry_widget_for_operators.get()
     if operator == "+":
         result = value_1 + value_2
@@ -204,6 +204,7 @@ def calculate():
             result = "{:.2f}".format(result)
             return result
         except ZeroDivisionError:
+            entry_widget_for_numbers.delete(0, tk.END)
             entry_widget_for_numbers.insert(0, "Error! We can't divide by 0.")
 
 
@@ -216,11 +217,15 @@ def calculate():
 #                 update the text in the result label widget
 def submit_operator_button_clicked():
     if entry_widget_for_operators.get() == "Enter an operator here: +, -, x, /":
-        pass
-    else:
-        final_result = calculate(value_1, value_2)
-        final_result = "RESULT: " + final_result
-        result_widget.config(text=final_result)  # updates the result in the widget
+        return
+    valid_operators = {"+", "-", "*", "/"}
+    if entry_widget_for_operators.get() not in valid_operators:
+        entry_widget_for_operators.delete(0, tk.END)
+        entry_widget_for_operators.insert(0, "Error! Enter a valid operator: +, -, x, /")
+        return
+    final_result = calculate(value_1, value_2)
+    final_result = "RESULT: " + str(final_result)
+    result_widget.config(text=final_result)  # updates the result in the widget
 
 
 #         create a submit button for the operator widget
