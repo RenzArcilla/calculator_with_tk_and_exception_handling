@@ -88,14 +88,21 @@ value_2 = 0
 #         adjust window size
 #         make window non-resizable
 window = Tk()
-window.geometry("1100x670")
+window.geometry("500x500")
 window.title("Calculator")
 window.resizable(False, False)
+window.config(bg="#808080")
+
+
+blank_line = tk.Label(window, text="\n" * 3, bg="#808080")
+blank_line.pack()
+
 
 #         create a widget for entry of numbers, add text instructing the user what to input
-entry_widget_for_numbers = tk.Entry(window, width=50)
+entry_widget_for_numbers = tk.Entry(window, font=("Open Sans", 17), bg="#F2F2F2",
+                                    fg="#000000", justify="center", width=30)
 entry_widget_for_numbers.pack()
-entry_widget_for_numbers.insert(0, "Enter a number here.")
+entry_widget_for_numbers.insert(0, "Enter a number here")
 
 
 #         create a function called submit_value_1_clicked:
@@ -110,7 +117,7 @@ entry_widget_for_numbers.insert(0, "Enter a number here.")
 #                 if value is NOT a number:
 #                     send an error message
 def submit_value_1_clicked():
-    if entry_widget_for_numbers.get() == "Enter a number here.":
+    if entry_widget_for_numbers.get() == "Enter a number here":
         return
     else:
         global value_1
@@ -118,7 +125,7 @@ def submit_value_1_clicked():
         try:
             value_1 = float(entry_widget_for_numbers.get())
             entry_widget_for_numbers.delete(0, tk.END)
-            entry_widget_for_numbers.insert(0, "Please enter another number in this box")
+            entry_widget_for_numbers.insert(0, "Please enter another number")
         except ValueError:
             entry_widget_for_numbers.delete(0, tk.END)
             entry_widget_for_numbers.insert(0, "Error encountered! Pls enter a number.")
@@ -126,7 +133,8 @@ def submit_value_1_clicked():
 
 #         create a button for user to submit value 1
 #         in button, add a command that calls a function when clicked
-num_1_send_button = tk.Button(window, text="SEND NUM 1", command=submit_value_1_clicked)
+num_1_send_button = tk.Button(window, text="SEND NUM 1", font=("Open Sans", 13),
+                              bg="#000000", fg="#FFFFFF", command=submit_value_1_clicked)
 num_1_send_button.pack()
 
 
@@ -152,19 +160,25 @@ def submit_value_2_clicked():
             entry_widget_for_numbers.delete(0, tk.END)
         except ValueError:
             entry_widget_for_numbers.delete(0, tk.END)
-            entry_widget_for_numbers.insert(0, "Error encountered! Pls enter a number.")
+            entry_widget_for_numbers.insert(0, "Error encountered! Please enter a number.")
 
 
 #         create another button for users to submit value 2
 #         in button add a command that calls a function when clicked
-num_2_send_button = tk.Button(window, text="SEND NUM 2", command=submit_value_2_clicked)
+num_2_send_button = tk.Button(window, text="SEND NUM 2", font=("Open Sans", 13), bg="#000000",
+                              fg="#FFFFFF", command=submit_value_2_clicked)
 num_2_send_button.pack()
 
 
+blank_line = tk.Label(window, text="\n" * 3, bg="#808080")
+blank_line.pack()
+
+
 #         create widget for users to input an operator, create a text stating what to input
-entry_widget_for_operators = tk.Entry(window, width=30)
+entry_widget_for_operators = tk.Entry(window, width=27)
 entry_widget_for_operators.pack()
-entry_widget_for_operators.insert(0, "Enter an operator here: +, -, x, /")
+entry_widget_for_operators.insert(0, "Enter an operator here: + - x /")
+entry_widget_for_operators.config(font=("Open Sans", 17), justify="center", bg="#F2F2F2", fg="#000000")
 
 
 #         create function named calculate:
@@ -216,22 +230,30 @@ def calculate(value_1, value_2):
 #                 concatenate the value to a string: "RESULT:"
 #                 update the text in the result label widget
 def submit_operator_button_clicked():
-    if entry_widget_for_operators.get() == "Enter an operator here: +, -, x, /":
+    if entry_widget_for_operators.get() == "Enter an operator here: + - x /":
         return
     valid_operators = {"+", "-", "*", "/"}
     if entry_widget_for_operators.get() not in valid_operators:
         entry_widget_for_operators.delete(0, tk.END)
-        entry_widget_for_operators.insert(0, "Error! Enter a valid operator: +, -, x, /")
+        entry_widget_for_operators.insert(0, "Error! Enter a valid operator: + - x /")
         return
     final_result = calculate(value_1, value_2)
-    final_result = "RESULT: " + str(final_result)
-    result_widget.config(text=final_result)  # updates the result in the widget
+    if entry_widget_for_numbers.get() != "Error! We can't divide by 0.":
+        entry_widget_for_numbers.insert(0, "Enter a number here")
+        entry_widget_for_operators.insert(0, "Enter an operator here: + - x /")
+        final_result = "RESULT: " + str(final_result)
+        result_widget.config(text=final_result)  # updates the result in the widget
 
 
 #         create a submit button for the operator widget
 #         in button, add a command that calls a function when submit_operator_button is clicked
-submit_operator_button = tk.Button(window, text="SEND OPERATOR", command=submit_operator_button_clicked)
+submit_operator_button = tk.Button(window, font=("Open Sans", 13), text="SEND OPERATOR", bg="#000000", fg="#FFFFFF",
+                                   command=submit_operator_button_clicked)
 submit_operator_button.pack()
+
+
+blank_line = tk.Label(window, text="\n" * 3, bg="#808080")
+blank_line.pack()
 
 
 #         create a result label widget that will display the final result
@@ -240,7 +262,7 @@ submit_operator_button.pack()
 result_widget = tk.Label(window, width=30)
 # the following 2 lines of code is executed, it is updated when a calculation occurs
 result_text = "RESULT:"
-result_widget.config(text=result_text)
+result_widget.config(font=("Open Sans", 17, "bold"), text=result_text, bg="#808080", fg="#FFFFFF")
 result_widget.pack()
 
 
