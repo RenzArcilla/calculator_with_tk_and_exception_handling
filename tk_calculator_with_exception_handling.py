@@ -232,7 +232,7 @@ def calculate(value_1, value_2):
 def submit_operator_button_clicked():
     if entry_widget_for_operators.get() == "Enter an operator here: + - x /":
         return
-    valid_operators = {"+", "-", "*", "/"}
+    valid_operators = {"+", "-", "x", "/"}
     if entry_widget_for_operators.get() not in valid_operators:
         entry_widget_for_operators.delete(0, tk.END)
         entry_widget_for_operators.insert(0, "Error! Enter a valid operator: + - x /")
