@@ -240,6 +240,7 @@ def submit_operator_button_clicked():
     final_result = calculate(value_1, value_2)
     if entry_widget_for_numbers.get() != "Error! We can't divide by 0.":
         entry_widget_for_numbers.insert(0, "Enter a number here")
+        entry_widget_for_operators.delete(0, tk.END)
         entry_widget_for_operators.insert(0, "Enter an operator here: + - x /")
         final_result = "RESULT: " + str(final_result)
         result_widget.config(text=final_result)  # updates the result in the widget
